@@ -10,8 +10,8 @@ class Scenario_reducer():
     given a fixed n, reduces an original set of scenarios
     with cardinality N to a smaller one of cardinality n.
 
-    Different strategies can vary w.r.t.:
-    -The distance
+    Different strategies can vary, for example, w.r.t.:
+    -The metric
     -The selection order (Fast forward, backward, simultaneous backward)
 
     For further details, please refer to:
@@ -28,6 +28,6 @@ class Scenario_reducer():
         """
         reduces the initial set of scenarios
 
-        distances allowed 1,2,np.inf
+        distances allowed so far: 1,2,np.inf
         """   
         pass

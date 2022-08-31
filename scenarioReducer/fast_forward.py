@@ -37,7 +37,7 @@ class Fast_forward(Scenario_reducer):
         dist_mtrx = np.zeros((self.N,self.N))
         #check on the mtrx
         if not distance in [1,2,np.inf]:
-            raise ValueError('distance not allowed')
+            raise ValueError('metric not allowed')
         for i in range(self.N):
             for j in range(self.N):
                 dist_mtrx[i,j] = np.linalg.norm( self.initialSet[:,i] - self.initialSet[:,j],distance )
