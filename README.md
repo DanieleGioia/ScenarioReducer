@@ -1,22 +1,22 @@
 # ScenarioReducer
 
-This library implements several approximate scenario reduction algorithms. Given a probability distribution with finite support, they aim to determine a probability measure with support of reduced and fixed cardinality by selecting the closest to the original one in terms of a selected probability metric.
+This library implements several approximate scenario reduction algorithms. Given a probability distribution with finite support, they aim to determine a probability measure with support of reduced and fixed cardinality by selecting the closest to the original one in terms of a selected statistical distance.
 
 For further details, please refer to:
 
 ```Bibtex
 @article{Heitsch2003,
-	author = {Heitsch, Holger and R{\"o}misch, Werner},
-	date = {2003/02/01},
-	doi = {10.1023/A:1021805924152},
-	isbn = {1573-2894},
-	journal = {Computational Optimization and Applications},
-	number = {2},
-	pages = {187--206},
-	title = {Scenario Reduction Algorithms in Stochastic Programming},
-	url = {https://doi.org/10.1023/A:1021805924152},
-	volume = {24},
-	year = {2003}
+author = {Heitsch, Holger and R{\"o}misch, Werner},
+date = {2003/02/01},
+doi = {10.1023/A:1021805924152},
+isbn = {1573-2894},
+journal = {Computational Optimization and Applications},
+number = {2},
+pages = {187--206},
+title = {Scenario Reduction Algorithms in Stochastic Programming},
+url = {https://doi.org/10.1023/A:1021805924152},
+volume = {24},
+year = {2003}
 }
 ```
 
@@ -36,12 +36,12 @@ It is an abstract class for a scenario reducer that suggests the methods that a 
 
 Different strategies can vary, for example, w.r.t.:
 
-- The metric.
-- The selection order (Fast forward, backward, simultaneous backward).
+- The statistical distance.
+- The selection order (Fast Forward, Backward, Simultaneous Backward, ...).
 
 ### Fast_forward class
 
-This class implements a scenario reducer that follows a *Fast Forward* (FF) technique from: 
+This class implements a scenario reducer that follows a *Fast Forward* (FF) technique from:
 
 [1] Heitsch, Holger, and Werner Römisch. "Scenario reduction algorithms in stochastic programming." Computational optimization and applications 24.2-3 (2003): 187-206.
 

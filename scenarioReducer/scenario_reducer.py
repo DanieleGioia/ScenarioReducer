@@ -11,8 +11,8 @@ class Scenario_reducer():
     with cardinality N to a smaller one of cardinality n.
 
     Different strategies can vary, for example, w.r.t.:
-    -The metric
-    -The selection order (Fast forward, backward, simultaneous backward)
+    -The statistical distance.
+    -The selection order (Fast forward, backward, simultaneous backward, ...).
 
     For further details, please refer to:
     [1] Heitsch, Holger, and Werner Römisch. "Scenario reduction algorithms in stochastic programming." Computational optimization and applications 24.2-3 (2003): 187-206.

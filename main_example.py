@@ -8,11 +8,11 @@ initialProbs = (1/400)*np.ones(400) #mass uniformly distr
 FFreducer = Fast_forward(initialScenario,initialProbs)
 #scenario reduction
 newScenario,newProbs = FFreducer.reduce(2,5) #2norm, 5scenarios
-print('W2_red')
+print('Norm 2_red')
 print(newScenario)
 print(newProbs)
 #
 newScenario,newProbs = FFreducer.reduce(np.inf,5) #Infnorm, 5scenarios
-print('Winf_red')
+print('Norm inf_red')
 print(newScenario)
 print(newProbs)
