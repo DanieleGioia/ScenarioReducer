@@ -45,7 +45,7 @@ This class implements a scenario reducer that follows a *Fast Forward* (FF) tech
 
 [1] Heitsch, Holger, and Werner Römisch. "Scenario reduction algorithms in stochastic programming." Computational optimization and applications 24.2-3 (2003): 187-206.
 
-FF is preferred for $n<N/4$ , where $n$  is the new reduced cardinality of the support and $N$ is the original one.
+FF is preferred for $n\leN/4$ , where $n$  is the new reduced cardinality of the support and $N$ is the original one.
 
 ### Example
 
