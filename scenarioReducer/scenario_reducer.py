@@ -2,7 +2,7 @@ from abc import abstractmethod
 '''
 @author: Daniele Giovanni Gioia
 @date:3/06/2022
-@copyright: Copyright 2022, Politecnico of Turin, IT
+@copyright: Copyright 2022, Politecnico di Torino, IT
 '''
 class Scenario_reducer():
     '''
