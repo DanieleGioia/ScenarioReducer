@@ -38,9 +38,10 @@ class Fast_forward(Scenario_reducer):
         #check on the mtrx
         if not distance in [1,2,np.inf]:
             raise ValueError('distance not allowed')
-        for i in range(self.N):
-            for j in range(self.N):
+        for i in range(self.N): #sym matrix
+            for j in range(i+1):
                 dist_mtrx[i,j] = np.linalg.norm( self.initialSet[:,i] - self.initialSet[:,j],distance )
+                dist_mtrx[j,i] = dist_mtrx[i,j]
         #### 
         J_set = np.arange(self.N)
         ##Step 1
