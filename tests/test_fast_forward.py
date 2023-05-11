@@ -8,6 +8,8 @@ from scenarioReducer import Fast_forward
 '''
 @author: pdb567
 @date:11/05/2022
+
+Run from cmd with print option: pytest -s test_fast_forward.py
 '''
 
 class NormalScenarioGenerator:
