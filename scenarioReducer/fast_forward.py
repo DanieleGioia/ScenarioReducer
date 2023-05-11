@@ -1,5 +1,12 @@
 from .scenario_reducer import Scenario_reducer
 import numpy as np
+# Use numba if available
+try:
+    from numba import njit
+except ImportError:
+    def njit(*args, **kwargs):
+        return lambda f: f
+
 '''
 @author: Daniele Giovanni Gioia
 @date:3/06/2022
@@ -34,56 +41,74 @@ class Fast_forward(Scenario_reducer):
         indxR = [] #indeces of the reduced set
         probs_initial = self.initProbs.copy() 
         #### computation of the distance matrix
-        dist_mtrx = np.zeros((self.N,self.N))
         #check on the mtrx
         if not distance in [1,2,np.inf]:
             raise ValueError('distance not allowed')
-        for i in range(self.N): #sym matrix
-            for j in range(i+1):
-                dist_mtrx[i,j] = np.linalg.norm( self.initialSet[:,i] - self.initialSet[:,j],distance )
-                dist_mtrx[j,i] = dist_mtrx[i,j]
+        dist_mtrx = compute_distance_matrix(self.initialSet, distance)
         dist_mtrx_original = dist_mtrx.copy()
         #### 
         J_set = np.arange(self.N)
         ##Step 1
-        zeta = np.zeros(self.N)
-        for u in J_set:
-            tmpProb = probs_initial[u]
-            probs_initial[u] = 0 #set zero that element
-            zeta[u] = probs_initial @ dist_mtrx[:,u]
-            probs_initial[u] = tmpProb #restore the element
+        zeta = calculate_zeta(J_set, dist_mtrx, probs_initial)
         ##first indx
-        indxR.append(np.nanargmin(zeta))
+        u = np.nanargmin(zeta)
+        indxR.append(u)
         ####
         ##Step i
         for it in range(n_scenarios-1): #we already did the first
-            dist_mtrx[np.ix_(J_set, J_set)] = np.minimum(dist_mtrx[np.ix_(J_set, J_set)], dist_mtrx[J_set, u])
-            zeta = np.zeros(self.N) #new zeta
+            dist_mtrx = np.minimum(dist_mtrx, dist_mtrx[u, :])
             probs_initial[indxR] = 0 #set zero chosen elements
             #new J_set
             J_set = np.setdiff1d(J_set,indxR[-1]) # remove the last selected item
-            for u in J_set:
-                tmpProb = probs_initial[u]
-                probs_initial[u] = 0 #set zero that element
-                zeta[u] = probs_initial @ dist_mtrx[:,u]
-                probs_initial[u] = tmpProb #restore the element
+            zeta = calculate_zeta(J_set, dist_mtrx, probs_initial)
             #new selection
-            zeta[indxR] = np.nan #eliminated indx
-            indxR.append(np.nanargmin(zeta))
+            u = np.argmin(zeta)
+            indxR.append(u)
         J_set = np.setdiff1d(J_set,indxR[-1])#last removed
         #### 
         ##Probabilities redistribution
         probs_initial = self.initProbs.copy()  #re_int
-        probs_reduced = probs_initial[indxR] #probabilities in the reduced set
-        #closest scenario selection
-        #set diag NaN oth it would be the minimum
-        dist_mtrx = dist_mtrx_original
-        dist_mtrx[np.arange(self.N),np.arange(self.N)] = np.nan
-        indx_closest = lambda x: np.nanargmin(dist_mtrx[x,indxR])
-        for toDelete in J_set:
-            probs_reduced[indx_closest(toDelete)] += probs_initial[toDelete]
+        probs_reduced = redistribute_probs(np.array(indxR), probs_initial, dist_mtrx_original, J_set)
+        # Alternate probability calculation, vectorized
+
         #new probs check
         if round(np.sum(probs_reduced),2) != 1:
             raise ValueError('new Probs must sum to one')
         #returns the reduced set and the respective probabilities
         return self.initialSet[:,indxR],probs_reduced
+
+
+@njit(cache=True)
+def compute_distance_matrix(initialSet, distance):
+    N = initialSet.shape[1]
+    dist_mtrx = np.zeros((N, N))
+    for i in range(N): #sym matrix
+            for j in range(i+1):
+                dist_mtrx[i,j] = np.linalg.norm(initialSet[:,i] - initialSet[:,j],distance )
+                dist_mtrx[j,i] = dist_mtrx[i,j]
+    return dist_mtrx
+
+
+@njit(cache=True)
+def calculate_zeta(J_set, dist_mtrx, probs_initial):
+    N = probs_initial.shape[0]
+    zeta = np.ones(N)*np.inf
+    for u in J_set:
+        tmpProb = probs_initial[u]
+        probs_initial[u] = 0  # set zero that element
+        zeta[u] = probs_initial @ dist_mtrx[u, :]
+        probs_initial[u] = tmpProb  # restore the element
+    return zeta
+
+
+# numba doesn't help this one since it spends its time in numpy vectorized functions
+def redistribute_probs(indxR, probs_initial, dist_mtrx_original, J_set):
+    N = probs_initial.shape[0]
+    probs_reduced = np.zeros(len(indxR))
+    #closest scenario selection
+
+    dist_mtrx = dist_mtrx_original[:, indxR]
+    indx_closest = np.argmin(dist_mtrx, axis=1)
+    for u in range(len(indxR)):
+        probs_reduced[u] += np.sum(probs_initial[indx_closest == u])
+    return probs_reduced
