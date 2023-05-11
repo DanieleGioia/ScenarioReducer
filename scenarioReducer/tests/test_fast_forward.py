@@ -5,6 +5,10 @@ from scipy.stats import norm
 from statsmodels.stats.weightstats import DescrStatsW
 from scenarioReducer import Fast_forward
 
+'''
+@author: pdb567
+@date:11/05/2022
+'''
 
 class NormalScenarioGenerator:
     def __init__(self, loc=0, scale=1, seed=47):

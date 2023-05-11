@@ -42,7 +42,7 @@ class Fast_forward(Scenario_reducer):
             for j in range(i+1):
                 dist_mtrx[i,j] = np.linalg.norm( self.initialSet[:,i] - self.initialSet[:,j],distance )
                 dist_mtrx[j,i] = dist_mtrx[i,j]
-        dist_mtrx_original = dist_mtrx.copy()
+        dist_mtrx_original = dist_mtrx.copy() #copy of the distance matrix
         #### 
         J_set = np.arange(self.N)
         ##Step 1
@@ -57,6 +57,7 @@ class Fast_forward(Scenario_reducer):
         ####
         ##Step i
         for it in range(n_scenarios-1): #we already did the first
+            #update the distance matrix
             dist_mtrx[np.ix_(J_set, J_set)] = np.minimum(dist_mtrx[np.ix_(J_set, J_set)], dist_mtrx[J_set, u])
             zeta = np.zeros(self.N) #new zeta
             probs_initial[indxR] = 0 #set zero chosen elements

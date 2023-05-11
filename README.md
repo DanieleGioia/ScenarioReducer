@@ -28,6 +28,7 @@ year = {2003}
 | |____scenario_reducer.py
 | |______init__.py
 | |____fast_forward.py
+| |____tests
 ```
 
 ### ScenarioReducer Class
@@ -50,3 +51,7 @@ FF is preferred for $n\le \frac{N}{4}$ , where $n$  is the new reduced cardinali
 ### Example
 
 An easy example to familiarize yourself with the library is provided in **main_example.py**
+
+### Available tests
+
+1. *test_fast_forward* creates a starting set of one-dimensional Gaussian distributed scenarios of known mean and variance. The test then uses the *Fast_Forward* class to reduce the number of scenarios. Mean, standard deviation, and 0.05, 0.5, and 0.95 quantiles are eventually compared between the original scenario set and the reduced scenario set to confirm that such statistical measures are close.
