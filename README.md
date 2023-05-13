@@ -28,7 +28,8 @@ year = {2003}
 | |____scenario_reducer.py
 | |______init__.py
 | |____fast_forward.py
-| |____tests
+|____tests
+| |____test_fast_forward.py
 ```
 
 ### ScenarioReducer Class
