@@ -4,6 +4,7 @@ import pytest
 from scipy.stats import norm
 from statsmodels.stats.weightstats import DescrStatsW
 from scenarioReducer import Fast_forward
+from scenarioReducer.fast_forward import compute_distance_matrix, redistribute_probs
 
 '''
 @author: pdb567
@@ -38,6 +39,19 @@ class NormalScenarioGenerator:
 def scenario_generator():
     gen = NormalScenarioGenerator()
     return gen
+
+
+def test_redistribute_probs():
+    # redistribute_probs(indxR, probs_initial, dist_mtrx, J_set)
+    N = 10
+    y = np.arange(N, dtype=float).reshape((1, -1))
+    indxR = np.array([2, 6])
+    probs_initial = np.ones(N) / N
+    dist_mtrx = compute_distance_matrix(y, np.inf)
+    J_set = np.setdiff1d(np.arange(N), indxR)
+    print(J_set)
+    probs_reduced = redistribute_probs(indxR, probs_initial, dist_mtrx, J_set)
+    np.testing.assert_equal(probs_reduced, np.array([5, 5])/N)
 
 
 def test_fast_forward_stats(scenario_generator):
