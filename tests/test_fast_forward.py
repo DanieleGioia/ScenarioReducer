@@ -6,6 +6,12 @@ from statsmodels.stats.weightstats import DescrStatsW
 from scenarioReducer import Fast_forward
 from scenarioReducer.fast_forward import compute_distance_matrix, redistribute_probs
 
+'''
+@author: pdb567
+@date:11/05/2022
+
+Run from cmd with print option: pytest -s test_fast_forward.py
+'''
 
 class NormalScenarioGenerator:
     def __init__(self, loc=0, scale=1, seed=47):

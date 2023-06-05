@@ -45,7 +45,7 @@ class Fast_forward(Scenario_reducer):
         if not distance in [1,2,np.inf]:
             raise ValueError('distance not allowed')
         dist_mtrx = compute_distance_matrix(self.initialSet, distance)
-        dist_mtrx_original = dist_mtrx.copy()
+        dist_mtrx_original = dist_mtrx.copy()  #copy of the distance matrix
         #### 
         J_set = np.arange(self.N)
         ##Step 1
@@ -56,6 +56,7 @@ class Fast_forward(Scenario_reducer):
         ####
         ##Step i
         for it in range(n_scenarios-1): #we already did the first
+            #update the distance matrix
             dist_mtrx = np.minimum(dist_mtrx, dist_mtrx[u, :])
             probs_initial[indxR] = 0 #set zero chosen elements
             #new J_set
@@ -69,8 +70,6 @@ class Fast_forward(Scenario_reducer):
         ##Probabilities redistribution
         probs_initial = self.initProbs.copy()  #re_int
         probs_reduced = redistribute_probs(np.array(indxR), probs_initial, dist_mtrx_original, J_set)
-        # Alternate probability calculation, vectorized
-
         #new probs check
         if round(np.sum(probs_reduced),2) != 1:
             raise ValueError('new Probs must sum to one')
