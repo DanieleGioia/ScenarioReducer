@@ -3,7 +3,7 @@ requires=["flit_core >=3.4"]
 build-backend="flit_core.buildapi"
 
 [project]
-name=""scenarioreducer""
+name="scenarioreducer"
 version="0.1.0"
 authors=[
     {name="Daniele Giovani Gioia", email="daniele.gioia@polito.it"},
