@@ -4,7 +4,7 @@ build-backend="flit_core.buildapi"
 
 [project]
 name="ScenarioReducer"
-version="0.1.1"
+version="1.0.0"
 authors=[
     {name="Daniele Giovani Gioia", email="daniele.gioia@polito.it"},
 ]

@@ -14,3 +14,4 @@ First published package version on PyPI.
 ### Changed
 
 - From _setup.py_ to _pyproject.toml_
+- imports in example and test now from ScenarioReducer as installed package
