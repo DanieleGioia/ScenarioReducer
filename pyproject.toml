@@ -1,0 +1,48 @@
+[build-system]
+requires=["flit_core >=3.4"]
+build-backend="flit_core.buildapi"
+
+[project]
+name=""scenarioreducer""
+version="0.1.0"
+authors=[
+    {name="Daniele Giovani Gioia", email="daniele.gioia@polito.it"},
+]
+description="Scenario Reduction Algorithms in Stochastic Programming"
+readme="README.md"
+requires-python=">=3.6"
+keywords=[
+    "stochastic-programming",
+    "probability-metric",
+    "scenario-reduction",
+    "scenario-tree",
+]
+classifiers=[
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies=[
+    "scipy",
+    "numpy",
+    "statsmodels",
+    "numba",
+    "pytest",
+]
+
+[project.urls]
+repository="https://github.com/DanieleGioia/ScenarioReducer/blob/main/README.md"
+changelog="https://github.com/DanieleGioia/ScenarioReducer/blob/main/CHANGELOG.md"
+
+[tool.flit.module]
+name="scenarioreducer"
+
