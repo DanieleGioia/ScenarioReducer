@@ -25,6 +25,7 @@ year = {2003}
 ```Bash
 |____main_example.py
 |____scenarioReducer
+|____setup.py
 | |____scenario_reducer.py
 | |______init__.py
 | |____fast_forward.py
