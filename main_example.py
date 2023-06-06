@@ -1,4 +1,4 @@
-from scenarioReducer import *
+from ScenarioReducer import Fast_forward
 import numpy as np
 
 #generate a scenario

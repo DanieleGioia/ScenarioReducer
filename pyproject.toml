@@ -3,8 +3,8 @@ requires=["flit_core >=3.4"]
 build-backend="flit_core.buildapi"
 
 [project]
-name="scenarioreducer"
-version="0.1.0"
+name="ScenarioReducer"
+version="0.1.1"
 authors=[
     {name="Daniele Giovani Gioia", email="daniele.gioia@polito.it"},
 ]
@@ -42,7 +42,4 @@ dependencies=[
 [project.urls]
 repository="https://github.com/DanieleGioia/ScenarioReducer/blob/main/README.md"
 changelog="https://github.com/DanieleGioia/ScenarioReducer/blob/main/CHANGELOG.md"
-
-[tool.flit.module]
-name="scenarioreducer"
 

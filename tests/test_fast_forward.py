@@ -3,8 +3,8 @@ import numpy as np
 import pytest
 from scipy.stats import norm
 from statsmodels.stats.weightstats import DescrStatsW
-from scenarioReducer import Fast_forward
-from scenarioReducer.fast_forward import compute_distance_matrix, redistribute_probs
+from ScenarioReducer import Fast_forward
+from ScenarioReducer.fast_forward import compute_distance_matrix, redistribute_probs
 
 '''
 @author: pdb567
